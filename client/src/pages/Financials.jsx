@@ -23,6 +23,7 @@ const Financials = () => {
     { id: "audit", label: "Audit Reports" },
     { id: "annualReport", label: "Annual Report" },
     { id: "Budget", label: "Budget" },
+    { id: "mis", label: "MIS Summary" },
   ];
 
   // ====== Balance Sheet ======
@@ -75,6 +76,15 @@ const Financials = () => {
     { item: "Operations", budget: 120000, actual: 125000 },
   ];
 
+  // ====== MIS Summary Data ======
+  const misSummaryData = [
+    { metric: "Total Revenue", "Mar 24": "$1.2M", "May 25": "$1.4M", "Jun 25": "$1.6M", "Jul 25": "$1.8M" },
+    { metric: "EBITDA Margin", "Mar 24": "22%", "May 25": "25%", "Jun 25": "28%", "Jul 25": "30%" },
+    { metric: "Operating Profit", "Mar 24": "$300K", "May 25": "$350K", "Jun 25": "$400K", "Jul 25": "$450K" },
+    { metric: "Net Cash Flow", "Mar 24": "$120K", "May 25": "$150K", "Jun 25": "$180K", "Jul 25": "$200K" },
+    { metric: "Debt Ratio", "Mar 24": "0.7", "May 25": "0.65", "Jun 25": "0.6", "Jul 25": "0.55" },
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <h1 className="text-4xl font-bold text-red-800 text-center mb-8">Financials Dashboard</h1>
@@ -86,8 +96,8 @@ const Financials = () => {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-2 rounded-lg font-medium transition-all ${activeTab === tab.id
-                ? "bg-blue-600 text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
           >
             {tab.label}
@@ -106,64 +116,61 @@ const Financials = () => {
         {activeTab === "balanceSheet" && (
           <div className="overflow-x-auto bg-white shadow-lg rounded-xl border border-gray-200 p-4 mb-6">
             <h2 className="text-2xl font-semibold text-blue-600 mb-4">Balance Sheet</h2>
-            <div className="min-w-[800px] overflow-x-auto">
-  <table className="min-w-full text-gray-700 text-sm table-fixed border border-gray-200">
-    <thead className="bg-blue-600 text-white">
-      <tr>
-        <th className="py-2 px-4 w-1/6 text-left">Item</th>
-        <th className="py-2 px-4 w-1/6 text-left">2022</th>
-        <th className="py-2 px-4 w-1/6 text-left">2023</th>
-        <th className="py-2 px-4 w-1/6 text-left">2024</th>
-        <th className="py-2 px-4 w-1/6 text-left">2025</th>
-        <th className="py-2 px-4 w-1/6 text-left">Red Flags</th>
-      </tr>
-    </thead>
-    <tbody>
-      {balanceSheetData.map((row, i) => (
-        <tr key={i} className="border-b hover:bg-blue-50 transition-all">
-          <td className="py-2 px-4 w-1/6 font-medium text-left">{row.item}</td>
-          <td className="py-2 px-4 w-1/6 text-left">${row[2022].toLocaleString()}</td>
-          <td className="py-2 px-4 w-1/6 text-left">${row[2023].toLocaleString()}</td>
-          <td className="py-2 px-4 w-1/6 text-left">${row[2024].toLocaleString()}</td>
-          <td className="py-2 px-4 w-1/6 text-left">${row[2025].toLocaleString()}</td>
-          <td className="py-2 px-4 w-1/6 text-red-600 font-semibold text-left">{row.redFlags}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
+            <table className="min-w-full text-gray-700 text-sm table-fixed border border-gray-200">
+              <thead className="bg-blue-600 text-white">
+                <tr>
+                  <th className="py-2 px-4 text-left">Item</th>
+                  <th className="py-2 px-4 text-left">2022</th>
+                  <th className="py-2 px-4 text-left">2023</th>
+                  <th className="py-2 px-4 text-left">2024</th>
+                  <th className="py-2 px-4 text-left">2025</th>
+                  <th className="py-2 px-4 text-left">Red Flags</th>
+                </tr>
+              </thead>
+              <tbody>
+                {balanceSheetData.map((row, i) => (
+                  <tr key={i} className="border-b hover:bg-blue-50 transition-all">
+                    <td className="py-2 px-4 font-medium">{row.item}</td>
+                    <td className="py-2 px-4">${row[2022].toLocaleString()}</td>
+                    <td className="py-2 px-4">${row[2023].toLocaleString()}</td>
+                    <td className="py-2 px-4">${row[2024].toLocaleString()}</td>
+                    <td className="py-2 px-4">${row[2025].toLocaleString()}</td>
+                    <td className="py-2 px-4 text-red-600 font-semibold">{row.redFlags}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
 
-        {/* Profit & Loss with Line Chart */}
+        {/* Profit & Loss */}
         {activeTab === "profitLoss" && (
           <div className="bg-white shadow-lg rounded-xl border border-gray-200 p-4 mb-6">
             <h2 className="text-2xl font-semibold text-blue-600 mb-4">Profit & Loss</h2>
-           <div className="min-w-[700px] overflow-x-auto">
-  <table className="min-w-full text-gray-700 text-sm table-fixed mb-6 border border-gray-200">
-    <thead className="bg-blue-600 text-white">
-      <tr>
-        <th className="py-2 px-4 w-1/5 text-left">Year</th>
-        <th className="py-2 px-4 w-1/5 text-left">Revenue</th>
-        <th className="py-2 px-4 w-1/5 text-left">EBITDA</th>
-        <th className="py-2 px-4 w-1/5 text-left">PAT</th>
-        <th className="py-2 px-4 w-1/5 text-left">Extraordinary</th>
-      </tr>
-    </thead>
-    <tbody>
-      {profitLossData.map((row, i) => (
-        <tr key={i} className="border-b border-gray-200 hover:bg-blue-50 transition-all">
-          <td className="py-2 px-4 w-1/5 font-medium text-left">{row.year}</td>
-          <td className="py-2 px-4 w-1/5 text-left">${row.Revenue.toLocaleString()}</td>
-          <td className="py-2 px-4 w-1/5 text-left">${row.EBITDA.toLocaleString()}</td>
-          <td className="py-2 px-4 w-1/5 text-left">${row.PAT.toLocaleString()}</td>
-          <td className="py-2 px-4 w-1/5 text-left">${row.Extraordinary.toLocaleString()}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+            <div className="min-w-[700px] overflow-x-auto">
+              <table className="min-w-full text-gray-700 text-sm table-fixed mb-6 border border-gray-200">
+                <thead className="bg-blue-600 text-white">
+                  <tr>
+                    <th className="py-2 px-4 w-1/5 text-left">Year</th>
+                    <th className="py-2 px-4 w-1/5 text-left">Revenue</th>
+                    <th className="py-2 px-4 w-1/5 text-left">EBITDA</th>
+                    <th className="py-2 px-4 w-1/5 text-left">PAT</th>
+                    <th className="py-2 px-4 w-1/5 text-left">Extraordinary</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {profitLossData.map((row, i) => (
+                    <tr key={i} className="border-b border-gray-200 hover:bg-blue-50 transition-all">
+                      <td className="py-2 px-4 w-1/5 font-medium text-left">{row.year}</td>
+                      <td className="py-2 px-4 w-1/5 text-left">${row.Revenue.toLocaleString()}</td>
+                      <td className="py-2 px-4 w-1/5 text-left">${row.EBITDA.toLocaleString()}</td>
+                      <td className="py-2 px-4 w-1/5 text-left">${row.PAT.toLocaleString()}</td>
+                      <td className="py-2 px-4 w-1/5 text-left">${row.Extraordinary.toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
             {/* Chart */}
             <ResponsiveContainer width="100%" height={300}>
@@ -185,7 +192,7 @@ const Financials = () => {
           <div className="bg-white shadow-lg rounded-xl border border-gray-200 p-4 mb-6">
             <h2 className="text-2xl font-semibold text-blue-600 mb-4">Cash Flow</h2>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={cashFlowData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+              <BarChart data={cashFlowData}>
                 <XAxis dataKey="year" />
                 <YAxis />
                 <Tooltip />
@@ -244,33 +251,67 @@ const Financials = () => {
           </div>
         )}
 
-        {/*Budget */}
+        {/* Budget */}
         {activeTab === "Budget" && (
           <div className="overflow-x-auto bg-white shadow-lg rounded-xl border border-gray-200 p-4 mb-6">
             <h2 className="text-2xl font-semibold text-blue-600 mb-4">Budget</h2>
-            <div className="min-w-[600px] overflow-x-auto">
-              <table className="min-w-full text-gray-700 text-sm table-fixed border border-gray-300">
-                <thead className="bg-gray-500 text-white">
-                  <tr>
-                    <th className="py-2 px-4 w-1/3 text-left">Item</th>
-                    <th className="py-2 px-4 w-1/3 text-left">Budget</th>
-                    <th className="py-2 px-4 w-1/3 text-left">Actual</th>
+            <table className="min-w-full text-gray-700 text-sm border border-gray-300">
+              <thead className="bg-gray-500 text-white">
+                <tr>
+                  <th className="py-2 px-4 text-left">Item</th>
+                  <th className="py-2 px-4 text-left">Budget</th>
+                  <th className="py-2 px-4 text-left">Actual</th>
+                </tr>
+              </thead>
+              <tbody>
+                {chargesBudget.map((c, i) => (
+                  <tr key={i} className="border-b border-gray-200 hover:bg-blue-50 transition-all">
+                    <td className="py-2 px-4">{c.item}</td>
+                    <td className="py-2 px-4">${c.budget.toLocaleString()}</td>
+                    <td className="py-2 px-4">${c.actual.toLocaleString()}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {chargesBudget.map((c, i) => (
-                    <tr key={i} className="border-b border-gray-200 hover:bg-blue-50 transition-all">
-                      <td className="py-2 px-4 w-1/3">{c.item}</td>
-                      <td className="py-2 px-4 w-1/3">${c.budget.toLocaleString()}</td>
-                      <td className="py-2 px-4 w-1/3">${c.actual.toLocaleString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
+
+        {/* ✅ MIS Summary */}
+        {activeTab === "mis" && (
+          <div className="overflow-x-auto bg-white shadow-lg rounded-xl border border-gray-200 p-6 mb-6">
+            <h2 className="text-2xl font-semibold text-blue-600 mb-4">MIS Summary</h2>
+            <table className="min-w-full text-gray-700 text-sm border border-gray-200">
+              <thead className="bg-blue-600 text-white">
+                <tr>
+                  <th className="py-2 px-4 text-left w-1/4">Metric</th>
+                  <th className="py-2 px-4 text-left w-1/6">Mar 25</th>
+                  <th className="py-2 px-4 text-left w-1/6">Apr 25</th>
+                  <th className="py-2 px-4 text-left w-1/6">May 25</th>
+                  <th className="py-2 px-4 text-left w-1/6">Jun 25</th>
+                  <th className="py-2 px-4 text-left w-1/6">Jul 25</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { metric: "No. of New client", "Mar 25": "10", "Apr 25": "0", "May 25": "12", "Jun 25": "","July 25":""},
+                  { metric: "No. of SMF IPO", "Mar 25": "1","Apr 25":"1" , "May 25": "", "Jun 25": "1","July 25":"" },
+                  { metric: "No. of Valuation assigned", "Mar 25": "5", "Apr 25": "5", "May 25": "4", "Jun 25": "4" , "July 25":"" },
+
+                ].map((row, i) => (
+                  <tr key={i} className="border-b hover:bg-blue-50 transition-all">
+                    <td className="py-2 px-4 font-medium text-left">{row.metric}</td>
+                    <td className="py-2 px-4 text-left">{row["Mar 25"]}</td>
+                    <td className="py-2 px-4 text-left">{row["Apr 25"]}</td>
+                    <td className="py-2 px-4 text-left">{row["May 25"]}</td>
+                    <td className="py-2 px-4 text-left">{row["Jun 25"]}</td>
+                    <td className="py-2 px-4 text-left">{row["Jul 25"]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
       </motion.div>
     </div>
   );
