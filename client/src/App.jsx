@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import CapTable from "./pages/CapTable";
@@ -13,7 +19,14 @@ import ClientData from "./pages/ClientData";
 import ScrollToTop from "./components/ScrollToTop";
 import Main from "./pages/Main";
 
-// ✅ Fixed Exit Button Component
+import Navbar2 from "./pages/Navbar2";
+import About2 from "./pages/About2";
+import Request2 from "./pages/request2";
+import ClientData2 from "./pages/ClientData2";
+import CovenantTracking from "./pages/CovenantTracking";
+import ChargeSummary from "./pages/ChargeSummary";
+
+// ✅ Exit Button Component
 const ExitButton = ({ onExit }) => (
   <button
     onClick={onExit}
@@ -24,42 +37,52 @@ const ExitButton = ({ onExit }) => (
 );
 
 const AppContent = () => {
-  const [showMainApp, setShowMainApp] = useState(
-    localStorage.getItem("showMainApp") === "true"
+  const [selectedApp, setSelectedApp] = useState(
+    localStorage.getItem("selectedApp") || ""
   );
   const navigate = useNavigate();
 
-  // ✅ When user clicks on Flookup
-  const handleSelect = () => {
-    setShowMainApp(true);
-    localStorage.setItem("showMainApp", "true");
-    navigate("/"); // Go to main content
+  // ✅ Table 1 company click
+  const handleSelectTable1 = () => {
+    setSelectedApp("table1");
+    localStorage.setItem("selectedApp", "table1");
+    navigate("/"); // direct route to first screen of table 1
   };
 
-  // ✅ When user clicks Exit button
+  // ✅ Table 2 company click
+  const handleSelectTable2 = () => {
+    setSelectedApp("table2");
+    localStorage.setItem("selectedApp", "table2");
+    navigate("/"); // direct route to second app
+  };
+
+  // ✅ Exit button
   const handleExit = () => {
-    setShowMainApp(false);
-    localStorage.removeItem("showMainApp");
-    navigate("/main"); // Go back to main table page
+    setSelectedApp("");
+    localStorage.removeItem("selectedApp");
+    navigate("/main");
   };
 
-  // ✅ If user not selected yet, redirect to /main
+  // ✅ On first load — agar koi app selected nahi hai
   useEffect(() => {
-    if (!showMainApp) navigate("/main");
-  }, [showMainApp, navigate]);
+    if (!selectedApp) navigate("/main");
+  }, [selectedApp, navigate]);
 
   return (
     <>
       <ScrollToTop />
-      {!showMainApp ? (
-        <Main onSelect={handleSelect} />
-      ) : (
+
+      {!selectedApp ? (
+        // ✅ Main Page (Default)
+        <Main onSelect={handleSelectTable1} onSelect1={handleSelectTable2} />
+      ) : selectedApp === "table1" ? (
+        // ✅ TABLE 1 APP
         <>
           <Navbar />
           <ExitButton onExit={handleExit} />
           <div className="px-6 py-8">
             <Routes>
-              <Route path="/" element={<About />} />
+              <Route path="/" element={<About/>} />
               <Route path="/captables" element={<CapTable />} />
               <Route path="/valuation" element={<Valuations />} />
               <Route path="/portfoliosummary" element={<PortfolioSummary />} />
@@ -68,6 +91,24 @@ const AppContent = () => {
               <Route path="/compliance" element={<Compliance />} />
               <Route path="/request" element={<Request />} />
               <Route path="/client-data" element={<ClientData />} />
+            </Routes>
+          </div>
+        </>
+      ) : (
+        // ✅ TABLE 2 APP
+        <>
+          <Navbar2 />
+          <ExitButton onExit={handleExit} />
+          <div className="px-6 py-8">
+            <Routes>
+              <Route path="/" element={<About2/>} />
+              <Route path="/client-data2" element={<ClientData2/>} />
+              <Route path="/request2" element={<Request2/>} />
+              <Route path="/covenant-tracking" element={<CovenantTracking/>} />
+              <Route path="/covenant-tracking" element={<CovenantTracking/>} />
+              <Route path="/charge-summary" element={<ChargeSummary/>} />
+
+
             </Routes>
           </div>
         </>
