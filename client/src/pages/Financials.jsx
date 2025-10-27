@@ -147,8 +147,8 @@ const Financials = () => {
         {activeTab === "profitLoss" && (
           <div className="bg-white shadow-lg rounded-xl border border-gray-200 p-4 mb-6">
             <h2 className="text-2xl font-semibold text-blue-600 mb-4">Profit & Loss</h2>
-            <div className="min-w-[700px] overflow-x-auto">
-              <table className="min-w-full text-gray-700 text-sm table-fixed mb-6 border border-gray-200">
+            <div className="w-full overflow-x-auto">
+              <table className="min-w-full text-gray-700 text-xs sm:text-sm md:text-base border border-gray-200">
                 <thead className="bg-blue-600 text-white">
                   <tr>
                     <th className="py-2 px-4 w-1/5 text-left">Year</th>
