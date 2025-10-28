@@ -21,7 +21,8 @@ import Main from "./pages/Main";
 
 import Navbar2 from "./pages/Navbar2";
 import About2 from "./pages/About2";
-import Request2 from "./pages/request2";
+import Request2 from "./pages/Request2";
+
 import ClientData2 from "./pages/ClientData2";
 import CovenantTracking from "./pages/CovenantTracking";
 import ChargeSummary from "./pages/ChargeSummary";
@@ -82,7 +83,7 @@ const AppContent = () => {
           <ExitButton onExit={handleExit} />
           <div className="px-6 py-8">
             <Routes>
-              <Route path="/" element={<About/>} />
+              <Route path="/" element={<About />} />
               <Route path="/captables" element={<CapTable />} />
               <Route path="/valuation" element={<Valuations />} />
               <Route path="/portfoliosummary" element={<PortfolioSummary />} />
@@ -101,12 +102,12 @@ const AppContent = () => {
           <ExitButton onExit={handleExit} />
           <div className="px-6 py-8">
             <Routes>
-              <Route path="/" element={<About2/>} />
-              <Route path="/client-data2" element={<ClientData2/>} />
-              <Route path="/request2" element={<Request2/>} />
-              <Route path="/covenant-tracking" element={<CovenantTracking/>} />
-              <Route path="/covenant-tracking" element={<CovenantTracking/>} />
-              <Route path="/charge-summary" element={<ChargeSummary/>} />
+              <Route path="/" element={<About2 />} />
+              <Route path="/client-data2" element={<ClientData2 />} />
+              <Route path="/request2" element={<Request2 />} />
+              <Route path="/covenant-tracking" element={<CovenantTracking />} />
+              <Route path="/covenant-tracking" element={<CovenantTracking />} />
+              <Route path="/charge-summary" element={<ChargeSummary />} />
 
 
             </Routes>
