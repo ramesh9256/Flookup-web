@@ -5,26 +5,26 @@ import { User } from "lucide-react";
 const About2 = () => {
   const associatedEntities = [
     {
-      name: "Flookup Analytics Pvt. Ltd.",
+      name: "Nextyn Analytics Pvt. Ltd.",
       location: "Jaipur, India",
       date: "12 March 2018",
-      companies: "Flookup Finance, Flookup Research",
+      companies: "Nextyn Finance, Nextyn Research",
       financials: "$1.2M",
       employees: 42,
     },
     {
-      name: "Flookup Technologies LLP",
+      name: "Nextyn Technologies LLP",
       location: "Gurugram, India",
       date: "28 July 2020",
-      companies: "Flookup Capital, Flookup Data Systems",
+      companies: "Nextyn Capital, Nextyn Data Systems",
       financials: "$890K",
       employees: 30,
     },
     {
-      name: "Flookup Global Advisors",
+      name: "Nextyn Global Advisors",
       location: "Singapore",
       date: "5 February 2021",
-      companies: "Flookup Analytics Pvt. Ltd.",
+      companies: "Nextyn Analytics Pvt. Ltd.",
       financials: "$2.1M",
       employees: 18,
     },
@@ -59,7 +59,7 @@ const About2 = () => {
   ];
 
   const companyInfo = {
-    website: "https://www.flookup.com",
+    website: "https://www.Nextyn.com",
     phone: "+91-9876543210",
     lastUpdate: "10 Oct 2025",
     sector: "Technology > FinTech > Analytics",
@@ -67,7 +67,7 @@ const About2 = () => {
     competitiveLandscape:
       "Key competitors include Finlytics, ValuEdge, and InvestIQ in the financial analytics space.",
     compliance:
-      "Flookup complies with Indian Companies Act 2013, GDPR for international users, and regular filing with MCA.",
+      "Nextyn complies with Indian Companies Act 2013, GDPR for international users, and regular filing with MCA.",
     relatedPartySummary:
       "Related parties include founding investors and partner firms offering complementary analytics services.",
   };
@@ -85,7 +85,7 @@ const About2 = () => {
         <div className="md:w-3/4">
           <h1 className="text-4xl font-bold text-red-700 mb-4">About Nextyn</h1>
           <p className="text-gray-700 leading-relaxed text-lg">
-            Flookup is a cutting-edge platform providing company valuation,
+            Nextyn is a cutting-edge platform providing company valuation,
             financial analysis, and portfolio tracking solutions. Our mission is
             to make financial data accessible, intelligent, and actionable for
             businesses and investors worldwide.
